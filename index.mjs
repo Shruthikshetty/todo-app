@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import allRoutes from "./routes/index.mjs";
 
 // setting up express app
 const app = express();
@@ -17,6 +18,11 @@ mongoose
   .catch((err) => {
     console.log("failed to connect to the data base ");
   });
+
+// used to parse json
+app.use(express.json());
+// all the routes
+app.use(allRoutes);
 
 //routes
 app.get("/", (req, res) => {

@@ -1,3 +1,31 @@
 ### base route for todo app
 GET http://localhost:3000
 
+### get todo 
+GET http://localhost:3000/api/todo
+
+# Start Generation Here
+### create todo 
+POST http://localhost:3000/api/todo
+Content-Type: application/json
+
+{
+  "title": "Sample Todo",
+  "description": "This is a sample todo description.",
+  "dueDate": "2023-12-31T23:59:59.999Z"
+}
+
+### update todo 
+PUT http://localhost:3000/api/todo/1
+Content-Type: application/json
+
+{
+  "title": "Updated Todo",
+  "description": "This is an updated description.",
+  "status": "in-progress",
+  "dueDate": "2024-01-15T23:59:59.999Z"
+}
+
+### delete todo 
+DELETE http://localhost:3000/api/todo/1
+
