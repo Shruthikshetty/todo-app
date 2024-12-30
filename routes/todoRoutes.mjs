@@ -7,11 +7,13 @@ import {
   deleteTodoByID,
   updateTodoById,
 } from "../controllers/todoController.mjs";
+import { checkSchema, body } from "express-validator";
+import { createUserValidationSchema } from "../utils/userValidationSchemas.mjs";
 
 const router = Router();
 
 router.get("/", getTodos); // Get all task
-router.post("/", createTodo); //create a new todo task
+router.post("/", checkSchema(createUserValidationSchema), createTodo); //create a new todo task
 router.put("/:id", updateTodoById); //update a task
 router.delete("/:id", deleteTodoByID); //delete a task by id
 

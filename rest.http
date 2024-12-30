@@ -10,9 +10,9 @@ POST http://localhost:3000/api/todo
 Content-Type: application/json
 
 {
-  "title": "Sample Todo",
-  "description": "This is a sample todo description.",
-  "dueDate": "2023-12-31T23:59:59.999Z"
+  "title": "Team Meeting",
+  "description": "Discuss project timelines and assign tasks to team members.",
+  "dueDate": "2025-01-02T10:30:00.000Z"
 }
 
 ### update todo 
