@@ -4,8 +4,14 @@ import { matchedData, validationResult } from "express-validator";
 /**
  * used to get the list of todo items
  */
-export const getTodos = (req, res) => {
-  res.send("get api to be implemented ");
+export const getTodos = async (req, res) => {
+  // get all the todos
+  try {
+    const todos = await Todo.find();
+    return res.status(200).send(todos);
+  } catch (err) {
+    return res.status(500).send({ message: err.message ?? "failed" });
+  }
 };
 
 /**
@@ -17,10 +23,10 @@ export const createTodo = async (req, res) => {
   // check of there are no errors
   if (!result.isEmpty()) return res.status(400).send({ error: result.array() });
 
-  // get the validated data if no errors 
-  const data = matchedData(req)
+  // get the validated data if no errors
+  const data = matchedData(req);
 
-  // create a new todo item 
+  // create a new todo item
   const newTask = new Todo(data);
 
   try {
@@ -37,8 +43,29 @@ export const createTodo = async (req, res) => {
 /**
  * update a task by its id
  */
-export const updateTodoById = (req, res) => {
-  res.send("put api to be implemented ");
+export const updateTodoById = async (req, res) => {
+  const { id } = req.params;
+  // get the result of the validation done
+  const result = validationResult(req);
+  // catch any validation errors
+  if (!result.isEmpty()) return res.status(400).send({ error: result.array() });
+  // get the validated data if no errors
+  const data = matchedData(req);
+  
+  try {
+    // find and update the item
+    const todo = await Todo.findByIdAndUpdate(id, data);
+    if (!todo) {
+      // send err if no todo item for given index
+      res.send(404).send({ message: "todo task not found" });
+    }
+    res.status(200).send(todo);
+  } catch (err) {
+    // catching err if any caused in the above block
+    return res
+      .status(500)
+      .send({ message: "failed to retreive data", err: err?.message });
+  }
 };
 
 /**

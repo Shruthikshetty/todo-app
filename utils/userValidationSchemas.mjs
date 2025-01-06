@@ -1,3 +1,4 @@
+import { param } from "express-validator";
 import moment from "moment";
 
 export const createUserValidationSchema = {
@@ -29,3 +30,5 @@ export const createUserValidationSchema = {
     },
   },
 };
+
+export const validateId = param("id").isString().withMessage("not a valied id");

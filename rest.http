@@ -16,14 +16,14 @@ Content-Type: application/json
 }
 
 ### update todo 
-PUT http://localhost:3000/api/todo/1
+PUT http://localhost:3000/api/todo/6772b6e84644989477b76f81
 Content-Type: application/json
 
 {
   "title": "Updated Todo",
   "description": "This is an updated description.",
   "status": "in-progress",
-  "dueDate": "2024-01-15T23:59:59.999Z"
+  "dueDate": "2025-05-15T23:59:59.999Z"
 }
 
 ### delete todo 
