@@ -51,7 +51,7 @@ export const updateTodoById = async (req, res) => {
   if (!result.isEmpty()) return res.status(400).send({ error: result.array() });
   // get the validated data if no errors
   const data = matchedData(req);
-  
+
   try {
     // find and update the item
     const todo = await Todo.findByIdAndUpdate(id, data);
@@ -71,6 +71,18 @@ export const updateTodoById = async (req, res) => {
 /**
  * delete a task by its id
  */
-export const deleteTodoByID = (req, res) => {
-  res.send("delete api to be implemented ");
+export const deleteTodoByID = async (req, res) => {
+  // destructure the id
+  const { id } = req.params;
+  try {
+    const todo = await Todo.findByIdAndDelete(id);
+    if (!todo) {
+      res.send(404).send({ message: "todo task not found" });
+    }
+    res.status(200).send({ message: "deleted successfully" });
+  } catch (err) {
+    return res
+      .status(500)
+      .send({ message: "failed to delete", err: err?.message });
+  }
 };

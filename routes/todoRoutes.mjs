@@ -23,6 +23,6 @@ router.put(
   checkSchema(createUserValidationSchema),
   updateTodoById
 ); //update a task
-router.delete("/:id", deleteTodoByID); //delete a task by id
+router.delete("/:id", [validateId], deleteTodoByID); //delete a task by id
 
 export default router;

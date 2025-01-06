@@ -27,5 +27,5 @@ Content-Type: application/json
 }
 
 ### delete todo 
-DELETE http://localhost:3000/api/todo/1
+DELETE http://localhost:3000/api/todo/6772b6e84644989477b76f81
 
